@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/amitshah/AndroidStudioProjects/Android-BluetoothSPPLibrary-master/app/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- From: file:/Users/amitshah/AndroidStudioProjects/Android-BluetoothSPPLibrary-master/app/build/intermediates/exploded-aar/com.akexorcist/library/1.0.0/res/values/values.xml -->
+    <eat-comment/>
+    <dimen name="bluetooth_spp_padding">5dp</dimen>
+    <dimen name="bluetooth_spp_text_size">18sp</dimen>
+    <!-- From: file:/Users/amitshah/AndroidStudioProjects/Android-BluetoothSPPLibrary-master/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">BluetoothSPP</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_auto_connect">AutoConnectActivity</string>
+    <string name="title_activity_device_list">DeviceListActivity</string>
+    <string name="title_activity_listener">ListenerActivity</string>
+    <string name="title_activity_terminal">TerminalActivity</string>
+    <!-- From: file:/Users/amitshah/AndroidStudioProjects/Android-BluetoothSPPLibrary-master/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="AppTheme" parent="android:Theme.Light">
+        <!-- Customize your theme here. -->
+    </style>
+</resources>

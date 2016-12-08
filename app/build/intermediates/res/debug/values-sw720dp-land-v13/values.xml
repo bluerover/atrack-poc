@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/amitshah/AndroidStudioProjects/Android-BluetoothSPPLibrary-master/app/build/intermediates/exploded-aar/com.akexorcist/library/1.0.0/res/values-sw720dp-land-v13/values.xml -->
+    <eat-comment/>
+    <dimen name="bluetooth_spp_padding">15dp</dimen>
+    <dimen name="bluetooth_spp_text_size">30sp</dimen>
+</resources>

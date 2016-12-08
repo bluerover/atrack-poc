@@ -1,0 +1,11 @@
+/Users/amitshah/AndroidStudioProjects/Android-BluetoothSPPLibrary-master/app/build/intermediates/classes/debug
+/Users/amitshah/AndroidStudioProjects/Android-BluetoothSPPLibrary-master/app/build/intermediates/pre-dexed/debug/classes-ff5c4086a1af504f6d63971670ccd7f97c60cab2.jar
+/Users/amitshah/AndroidStudioProjects/Android-BluetoothSPPLibrary-master/app/build/intermediates/pre-dexed/debug/classes-6232e07e328f98b102787d8c5fe4657440ebfabc.jar
+/Users/amitshah/AndroidStudioProjects/Android-BluetoothSPPLibrary-master/app/build/intermediates/pre-dexed/debug/classes-8e0397cd0d9109536ec000de1fe88226b73ba32e.jar
+/Users/amitshah/AndroidStudioProjects/Android-BluetoothSPPLibrary-master/app/build/intermediates/pre-dexed/debug/org.eclipse.paho.android.service-1.0.2-59701a239be45b92ae77d8c374adcb43298c8b44.jar
+/Users/amitshah/AndroidStudioProjects/Android-BluetoothSPPLibrary-master/app/build/intermediates/pre-dexed/debug/classes-5092881e6a771fccfc8346fc0e7659d15db1c40f.jar
+/Users/amitshah/AndroidStudioProjects/Android-BluetoothSPPLibrary-master/app/build/intermediates/pre-dexed/debug/disruptor-3.3.0-3d8e4b37014a8cbf50ec968d3a5098c19e66bb6d.jar
+/Users/amitshah/AndroidStudioProjects/Android-BluetoothSPPLibrary-master/app/build/intermediates/pre-dexed/debug/org.eclipse.paho.client.mqttv3-1.0.2-ee4fbbf9eeb89779c1f6e06884558aaadb70e573.jar
+/Users/amitshah/AndroidStudioProjects/Android-BluetoothSPPLibrary-master/app/build/intermediates/pre-dexed/debug/support-v4-r7-a6ff2c2e6da81263fbe82c24bf6938662386e638.jar
+/Users/amitshah/AndroidStudioProjects/Android-BluetoothSPPLibrary-master/app/build/intermediates/pre-dexed/debug/mapdb-1.0.6-e409d3af7d5eea576361e969e9baf0e4dea02262.jar
+/Users/amitshah/AndroidStudioProjects/Android-BluetoothSPPLibrary-master/app/build/intermediates/pre-dexed/debug/netty-all-4.0.25.Final-b5a06adcc3109315fbbe1b6f1e6b56add6d76511.jar
