@@ -1,21 +1,39 @@
 package app.akexorcist.bluetoothspp;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
 
 public class Main extends Activity implements OnClickListener {
-
+    BroadcastReceiver myBroadCastReceviver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle bundle = intent.getExtras().getBundle("data");
+            PositionPacket pp = (PositionPacket)bundle.get(PositionPacket.class.toString());
+            Log.d("Main Activity", pp._rawMessage);
+        }
+    };
     protected void onStart(){
         //lets start the process in the backgrounda
         super.onStart();
 
 
     }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(myBroadCastReceviver);
+    }
+    
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
@@ -41,9 +59,16 @@ public class Main extends Activity implements OnClickListener {
 //            }
 //        };
 //        t.start();
+//        Intent autoConnect= new Intent(getApplicationContext(),AutoConnectService.class );
+//        startService(autoConnect);
+
+//        Intent broker = new Intent(getApplicationContext(), MqttBrokerService.class);
+//        startService(broker);
         Intent autoConnect= new Intent(getApplicationContext(),AutoConnectService.class );
         startService(autoConnect);
-        //Intent broker = new Intent(getApplicationContext(), MqttBackgroundService.class);
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(myBroadCastReceviver
+                ,new IntentFilter("OnData"));
 
 //        ServiceConnection autoConnectConnection = new ServiceConnection() {
 //            @Override

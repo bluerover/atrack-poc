@@ -19,7 +19,9 @@ package app.akexorcist.bluetoothspp;
 import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -29,7 +31,9 @@ import app.akexorcist.bluetotohspp.library.DeviceList;
 
 public class AutoConnectService extends Service {
     BluetoothSPP bt;
-    Thread runner;
+
+
+
     public static String[] configurationQueue = new String[]{
             "AT$OBDS=0",
             //Send updates every 10 seconds
@@ -107,13 +111,13 @@ public class AutoConnectService extends Service {
                                 , Toast.LENGTH_SHORT).show();
 
                         //configure device
-//                for (String param : AutoConnectService.configurationQueue){
-//                    bt.send(param,true);
-//                    Log.d("Configuration Setup", "Sent configuration command:"+param);
-//                    Toast.makeText(getApplicationContext()
-//                            , "sent config" + param
-//                            , Toast.LENGTH_SHORT).show();
-//                }
+//                        for (String param : AutoConnectService.configurationQueue){
+//                            bt.send(param,true);
+//                            Log.d("Configuration Setup", "Sent configuration command:"+param);
+//                            Toast.makeText(getApplicationContext()
+//                                    , "sent config" + param
+//                                    , Toast.LENGTH_SHORT).show();
+//                        }
                     }
 
                     public void onDeviceDisconnected() {
@@ -137,8 +141,12 @@ public class AutoConnectService extends Service {
                         //if returned packet is cmd packet, then write to blocking queue
                         //if returned packet is async data broadcast
                         Log.d("On Data Received", message);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable(PositionPacket.class.toString(),(new PositionPacket(message)));
                         //Toast.makeText(AutoConnectService.this, "CONFIGURATION MODE:"+message, Toast.LENGTH_SHORT).show();
-
+                        Intent intent = new Intent("OnData");
+                        intent.putExtra("data",bundle);
+                        LocalBroadcastManager.getInstance(AutoConnectService.this).sendBroadcast(intent);
                     }
                 });
 
@@ -233,7 +241,11 @@ public class AutoConnectService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         // We don't provide binding, so return null
+
         return null;
     }
+
+
+
 
 }

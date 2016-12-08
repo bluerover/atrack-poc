@@ -16,24 +16,22 @@
 
 package app.akexorcist.bluetoothspp;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
+
 import app.akexorcist.bluetotohspp.library.BluetoothSPP;
-import app.akexorcist.bluetotohspp.library.BluetoothState;
 import app.akexorcist.bluetotohspp.library.BluetoothSPP.BluetoothConnectionListener;
 import app.akexorcist.bluetotohspp.library.BluetoothSPP.OnDataReceivedListener;
+import app.akexorcist.bluetotohspp.library.BluetoothState;
 import app.akexorcist.bluetotohspp.library.DeviceList;
-import app.bluerover.services.MqttBackgroundService;
 
-import org.eclipse.moquette.server.*;
-
-import java.io.IOException;
+//import app.bluerover.services.MqttBackgroundService;
 
 
 public class SimpleActivity extends Activity {
@@ -41,10 +39,10 @@ public class SimpleActivity extends Activity {
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		Intent mqttBroker = new Intent(this, MqttBackgroundService.class);
-		mqttBroker.putExtra("foo", "bar");
-		startService(mqttBroker);
+//
+//		Intent mqttBroker = new Intent(this, MqttBackgroundService.class);
+//		mqttBroker.putExtra("foo", "bar");
+//		startService(mqttBroker);
 
 		setContentView(R.layout.activity_simple);
 //		Intent serviceIntent = new Intent(this, BluetoothSPP.class);
