@@ -404,11 +404,12 @@ public class BluetoothService {
                         arr_byte.add(data);
                     }
                 } catch (IOException e) {
-
+                    Log.e("BluetoothService", "read error");
 //                    connectionLost();
 //                    // Start the service over to restart listening mode
 //                    BluetoothService.this.start(BluetoothService.this.isAndroid);
 //                    break;
+                    break;
                 }
             }
         }

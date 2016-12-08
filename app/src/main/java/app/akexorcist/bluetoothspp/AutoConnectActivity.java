@@ -36,7 +36,7 @@ public class AutoConnectActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_autoconnect);
 
-        bt = new BluetoothSPP(this);
+        bt = new BluetoothSPP(getApplicationContext());
 
         if(!bt.isBluetoothAvailable()) {
             Toast.makeText(getApplicationContext()

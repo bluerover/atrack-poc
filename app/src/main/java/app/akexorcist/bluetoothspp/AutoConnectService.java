@@ -165,7 +165,7 @@ public class AutoConnectService extends Service {
     //protected void onCreate(Bundle savedInstanceState) {
         //super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_autoconnect);
-        setup();
+
         super.onStartCommand(intent, startId, startId);
         //runner.start();
         return Service.START_STICKY;
@@ -197,7 +197,7 @@ public class AutoConnectService extends Service {
             if(!bt.isServiceAvailable()) {
                 bt.setupService();
                 bt.startService(BluetoothState.DEVICE_OTHER);
-                //setup();
+                setup();
             }
 
         }

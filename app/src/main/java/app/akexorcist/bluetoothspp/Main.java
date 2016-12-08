@@ -41,8 +41,9 @@ public class Main extends Activity implements OnClickListener {
 //            }
 //        };
 //        t.start();
-//        Intent autoConnect= new Intent(getApplicationContext(),AutoConnectService.class );
-//        startService(autoConnect);
+        Intent autoConnect= new Intent(getApplicationContext(),AutoConnectService.class );
+        startService(autoConnect);
+        //Intent broker = new Intent(getApplicationContext(), MqttBackgroundService.class);
 
 //        ServiceConnection autoConnectConnection = new ServiceConnection() {
 //            @Override
