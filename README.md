@@ -3,6 +3,93 @@ Android-BluetoothSPPLibrary
 ===========================
 
 
+Bluetooth Background Service
+-------------
+Instantiate a background process from your first activity
+
+demo at: app.akexorcist.bluetoothspp.Main;
+
+```java
+ //example in Main Activity
+ Intent autoConnect= new Intent(getApplicationContext(),AutoConnectService.class );
+        startService(autoConnect);
+```
+
+EventDispatcher
+-------------
+Instantiate the abstract Event dispatcher class to get notified via localBroadcaster when position packets come in
+
+app.akexorcist.bluetoothspp.EventDispatcher
+```java
+
+//Inside an activity class, we instantiate and subscribe in the onCreate or onStart and we unsubscribe onDestroy
+//you may consider differently in your activity as you want to keep updating the items in high
+//resource pressure situtations (Android may destroy your activity sporadically in the background)
+EventDispatcher dispatcher;
+
+@Override
+public void onCreate(){
+    ...
+    dispatcher = new EventDispatche(getApplicationContext()){
+        @Override
+        handlePacker(PositionPacket pp){
+            //do something
+        }
+    };
+    dispatcher.subscribe();
+}
+
+@Override
+public void onDestroy(){
+    dispatcher.unsubscribe();
+}
+
+```
+
+PositionPacket
+-------------
+
+this class has the following properties parsed from the hardware
+
+        Example Value, Property Name
+
+        1481211972, gpsTimesamp
+        1481231214, rtcTimestamp
+        1481231214, positionSendDateTime
+        -80550329,longitude
+        43358366,latitude
+        0,heading
+        2,reportID
+        55677, odometer
+        990, gpsHDOP
+        1, inputStatus (8 bit status, input 1 = ignition)
+        35, vehicleSpeed
+        0,outputStatus
+        0,analogInput
+        ,driverID
+        2000,temperatureSensor1
+        2000,temperatureSensor2
+        "",textMessage
+        0,realTimeReport (0 - realtime, 1 log) DT
+        1296,rpmMax
+        1,vehicleIdleEventStatus (1 - true, 0 - false)
+        0,speedingEventStatus
+        35,speedMax
+        0,mainPowerLoseEventStatus
+        0,throttlePositionMax (%)
+        195291,fuelUser (0.1 litre)
+        0,fuelLevel(%)
+        0,engineCoolantTemperature (C)
+        080C00800040,gForceHarshEventMax
+        ,gSensorData
+        0,harshAccelerationEventStatus
+        0,harshBrakingEventStatus
+        0,impactEventStatus
+
+
+    *NOTE The G-sensor data are displayed in HEX in both of data format
+X axis = 1100(HEX) = 4352(DEC), Y axis = B400(HEX) = -19456 (DEC), Z axis = BD00(HEX) = -17152(DEC),
+
 ![BluetoothSPP Library](https://raw.githubusercontent.com/akexorcist/Android-BluetoothSPPLibrary/master/image/header.png)
 
 
@@ -49,7 +136,7 @@ compile 'com.akexorcist:bluetoothspp:1.0.0'
 Simple Usage
 --------------
 
-• Import this library to your workspace and include in to your android project 
+• Import this library to your workspace and include in to your android project
 For Eclipse ADT : Download this library and import into your workspace and include this library to your project
 For Android Studio : Use Gradle to download this library from Maven
 
@@ -87,7 +174,7 @@ public void onStart() {
 
 • if bluetooth is ready call this method to start service
 
-For connection with android device 
+For connection with android device
 ```java
 bt.startService(BluetoothState.DEVICE_ANDROID);
 ```
@@ -113,7 +200,7 @@ bt.startService(BluetoothState.DEVICE_OTHER);
 bt.stopService();
 ```
 
-• Intent to choose device activity 
+• Intent to choose device activity
 ```java
 Intent intent = new Intent(getApplicationContext(), DeviceList.class);
 startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
@@ -179,7 +266,7 @@ bt.setBluetoothConnectionListener(new BluetoothConnectionListener() {
 
 • Listener when bluetooth connection has changed
 ```java
-bt.setBluetoothStateListener(new BluetoothStateListener() {                
+bt.setBluetoothStateListener(new BluetoothStateListener() {
     public void onServiceStateChanged(int state) {
         if(state == BluetoothState.STATE_CONNECTED)
             // Do something when successfully connected
@@ -204,14 +291,14 @@ bt.setAutoConnectionListener(new AutoConnectionListener() {
     public void onNewConnection(String name, String address) {
         // Do something when earching for new connection device
     }
-            
+
     public void onAutoConnectionStarted() {
         // Do something when auto connection has started
     }
 });
 ```
 
-• Customize device list's layout by create layout which include 
+• Customize device list's layout by create layout which include
 
 list view with id name = "list_devices"
 
@@ -234,7 +321,7 @@ button with id name = "button_scan"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:smoothScrollbar="true" />
-        
+
     <Button
         android:id="@+id/button_scan"
         android:layout_width="wrap_content"
@@ -247,7 +334,7 @@ button with id name = "button_scan"
         android:textSize="25sp"
         android:textColor="#7A481B"
         android:textStyle="bold" />
-        
+
 </RelativeLayout>
 ```
 
@@ -280,7 +367,7 @@ startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
 
 What's next?
 ===========================
-- Connection Dialog 
+- Connection Dialog
 - Add Insecure Connection
 - Fix bug on this issue https://github.com/akexorcist/Android-BluetoothSPPLibrary/issues/21
 - Merge the code from https://github.com/akexorcist/Android-BluetoothSPPLibrary/pull/14 for a problem of auto connection

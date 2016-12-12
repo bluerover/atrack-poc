@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,18 +20,26 @@ public class Main extends Activity implements OnClickListener {
             Log.d("Main Activity", pp._rawMessage);
         }
     };
+
+    EventDispatcher ed = new EventDispatcher(Main.this) {
+        @Override
+        public void handlePacket(PositionPacket pp) {
+            Log.d(Main.class.toString(), pp._rawMessage);
+        }
+    };
     protected void onStart(){
         //lets start the process in the backgrounda
         super.onStart();
-
+        ed.subscribe();
 
     }
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(myBroadCastReceviver);
+        ed.unsubscribe();
+        //LocalBroadcastManager.getInstance(this).unregisterReceiver(myBroadCastReceviver);
     }
-    
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
@@ -67,8 +73,8 @@ public class Main extends Activity implements OnClickListener {
         Intent autoConnect= new Intent(getApplicationContext(),AutoConnectService.class );
         startService(autoConnect);
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(myBroadCastReceviver
-                ,new IntentFilter("OnData"));
+//        LocalBroadcastManager.getInstance(this).registerReceiver(myBroadCastReceviver
+//                ,new IntentFilter(EventDispatcher.Filter.ON_DATA));
 
 //        ServiceConnection autoConnectConnection = new ServiceConnection() {
 //            @Override

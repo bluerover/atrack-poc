@@ -33,9 +33,13 @@
             android:label="@string/title_activity_terminal" />
 
         <service
-            android:name="app.akexorcist.bluetoothspp.AutoConnectService"
+            android:name=".AutoConnectService"
             android:enabled="true"
             android:exported="true" />
+        <service
+            android:name=".MqttBrokerService"
+            android:enabled="false"
+            android:exported="false"></service>
     </application>
 
 </manifest>

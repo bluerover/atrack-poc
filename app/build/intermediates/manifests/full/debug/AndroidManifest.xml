@@ -53,6 +53,10 @@
             android:name="app.akexorcist.bluetoothspp.AutoConnectService"
             android:enabled="true"
             android:exported="true" />
+        <service
+            android:name="app.akexorcist.bluetoothspp.MqttBrokerService"
+            android:enabled="false"
+            android:exported="false" />
 
         <activity android:name="app.akexorcist.bluetotohspp.library.DeviceList" />
     </application>

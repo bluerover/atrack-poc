@@ -25,6 +25,8 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.LinkedList;
+
 import app.akexorcist.bluetotohspp.library.BluetoothSPP;
 import app.akexorcist.bluetotohspp.library.BluetoothState;
 import app.akexorcist.bluetotohspp.library.DeviceList;
@@ -32,45 +34,88 @@ import app.akexorcist.bluetotohspp.library.DeviceList;
 public class AutoConnectService extends Service {
     BluetoothSPP bt;
 
+    /* The following are the set of AT commands that must be run when a connection is completed
+    at this point we dont have
+    * auto detect old type
+    AT$OBDS=0
+    $OK
+    //time and distance, 180 secs, 10000 meters, 15 degrees, 0 min speed, send all packets i.e. 0, send data to bluetooth (SET to FFFF for sending to everything including GSM server), 0 schedule, 0 off time, last param left out
+    AT$TRAC=131,60,10000,15,0,0,16,0,0 
+    $OK
+    //set idle switch on
+    //: Either engine or ACC (Ignition) Status - 0
+    //speed < 5
+    //duration > 5 minutes
+    //enable = 1
+    AT$IDLE=0,5,5,1
+    $OK
+    //over riming 4500 for 5 secs
+    AT$RPME=4500,5,2500,10
+    $OK
 
+    user defined report action - send to bluetooth
+    AT$RACT=1,1,16
+    $OK
+    //speed above 100 for 10 seconds, or below 90 for 10 seconds
+    AT$SPED=100,10,90,10
+    $OK
+
+    //setup harsh braking using G sensor, 250 mg for 0.5 second
+    AT$HBKE=2,250,5
+    $OK
+    //setup harsh acceleration same as above
+    AT$HACE=2,250,5
+    $OK
+
+    //setupt impact event - 2G debounce (i.e. silence) for 2 seconds
+    AT$IMPD=2000,2
+    $OK
+
+    ACC on - off,
+    —send via RACT1 defined above
+    AT$REPT=101,1,”%IN0”,”1”,0,1 //iginition 
+    $OK
+    AT$REPT=102,1,”%DL”,”1”,0,1 //idle  
+    $OK
+    AT$REPT=103,1,”%RP”,”1”,0,1 //rpme  
+    $OK
+    AT$REPT=104,1,”%SD”,”1”,0,1 //sd 
+    $OK
+    AT$REPT=105,1,”%HA”,”1”,0,1 //Harsh Accel
+    $OK
+    AT$REPT=106,1,”%HB”,”1”,0,1 //Harsh Braking
+    $OK
+    AT$REPT=107,1,”%IP”,”1”,0,1 //Impact Sensor
+    $OK
+
+    AT$FORM=0,@p,0,”%DT%RP%DL%SD%SM%PS%TR%FC%FL%ET%GV%GN%HA%HB%IP”
+    $OK
+
+
+    *
+    * */
 
     public static String[] configurationQueue = new String[]{
             "AT$OBDS=0",
-            //Send updates every 10 seconds
-            "AT$TRAC=131,10,10000,15,0,0,16,0,0",
+            "AT$TRAC=131,60,10000,15,0,0,16,0,0 ",
             "AT$IDLE=0,5,5,1",
             "AT$RPME=4500,5,2500,10",
-
-            //user defined report action, send to bluetooth
             "AT$RACT=1,1,16",
-            //speed above 100 for 10 seconds, or deactivate when below 90 for 10 seconds
             "AT$SPED=100,10,90,10",
-            //send via RACT1 defined above
+            "AT$HBKE=2,250,5",
+            "AT$HACE=2,250,5",
+            "AT$IMPD=2000,2",
             "AT$REPT=101,1,\"%IN0\",\"1\",0,1", //iginition 
-            "AT$REPT=102,1,\"%DL\",\"1\",0,1", //idle  
+            "AT$REPT=102,1,\"%DL\",\"1\",0,1",//idle  
             "AT$REPT=103,1,\"%RP\",\"1\",0,1", //rpme  
-            "AT$REPT=104,1,\"%SD\",\"1\",0,1",//sd
-            "AT$REPT=105,1,\"%HA\",\"1\",0,1",//hard accel
-            "AT$REPT=106,1,\"%HB\",\"1\",0,1",//hard braking
-            "AT$REPT=107,1,\"%HC\",\"1\",0,1",//hard cornering
-            //setup output command format
-            //DT - realtime report or log
-            //RP - max engine rpm between readings
-            //DL - idle state
-            //SD - speeding event status
-            //SM - max speed between reports
-            //PS - Main power lose event status (no main voltage for 2 sec)
-            //TR - max throttle position between reports
-            //FC - fuel used in 0.1 litre increments
-            //FL - fuel level (%)
-            //ET - Engine Coolant Temperature event status
-            //GV - Maximum G-force value during the harsh events (*NOTE below)
-              //*NOTE The G-sensor data are displayed in HEX in both of data format
-              //X axis = 1100(HEX) = 4352(DEC), Y axis = B400(HEX) = -19456 (DEC), Z axis = BD00(HEX) = -17152(DEC),
-              //Binary 40508B06003900020001463868C076A0570DD8EA570DD8E9570DD8E9073EE3A5017EC651001B6500000000000801 00000000000007D007D0001100B400BD00 (look at the last 6 bytes)
-            "AT$FORM=0,@p,0,\"%DT%RP%DL%SD%SM%PS%TR%FC%FL%ET%GV\""
-    };
+            "AT$REPT=104,1,\"%SD\",\"1\",0,1", //sd 
+            "AT$REPT=105,1,\"%HA\",\"1\",0,1", //Harsh Accel
+            "AT$REPT=106,1,\"%HB\",\"1\",0,1", //Harsh Braking
+            "AT$REPT=107,1,\"%IP\",\"1\",0,1", //Impact Sensor
+            "AT$FORM=0,@p,0,\"%DT%RP%DL%SD%SM%PS%TR%FC%FL%ET%GV%GN%HA%HB%IP\""
 
+    };
+    LinkedList<String> configurationStatus = new LinkedList<String>();
 //    public class LocalBinder extends Binder {
 //        AutoConnectService getService() {
 //            return AutoConnectService.this;
@@ -111,13 +156,13 @@ public class AutoConnectService extends Service {
                                 , Toast.LENGTH_SHORT).show();
 
                         //configure device
-//                        for (String param : AutoConnectService.configurationQueue){
-//                            bt.send(param,true);
-//                            Log.d("Configuration Setup", "Sent configuration command:"+param);
-//                            Toast.makeText(getApplicationContext()
-//                                    , "sent config" + param
-//                                    , Toast.LENGTH_SHORT).show();
-//                        }
+                        for (String param : AutoConnectService.configurationQueue){
+                            bt.send(param,true);
+                            Log.d("Configuration Setup", param);
+                            Toast.makeText(getApplicationContext()
+                                    , "sent config" + param
+                                    , Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     public void onDeviceDisconnected() {
@@ -140,11 +185,14 @@ public class AutoConnectService extends Service {
                     public void onDataReceived(byte[] data, String message) {
                         //if returned packet is cmd packet, then write to blocking queue
                         //if returned packet is async data broadcast
+                        if(message == "$0K"){
+                            configurationStatus.add(message);
+                        }
                         Log.d("On Data Received", message);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable(PositionPacket.class.toString(),(new PositionPacket(message)));
                         //Toast.makeText(AutoConnectService.this, "CONFIGURATION MODE:"+message, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent("OnData");
+                        Intent intent = new Intent(EventDispatcher.Filter.ON_DATA);
                         intent.putExtra("data",bundle);
                         LocalBroadcastManager.getInstance(AutoConnectService.this).sendBroadcast(intent);
                     }
