@@ -8,6 +8,43 @@ import java.io.Serializable;
 
 public class PositionPacket implements Serializable{
     String _rawMessage;
+    int crc;
+    int length;
+    long seqID;
+    String unitID;
+    long gpsTimesamp;
+    long rtcTimestamp;
+    long  positionSendDateTime;
+    long longitude;
+    long latitude;
+    double heading;
+    int reportID;
+    long odometer;
+    int gpsHDOP;
+    byte inputStatus;
+    double vehicleSpeed;
+    int outputStatus;
+    int analogInput;
+    String driverID;
+    double temperatureSensor1;
+    double temperatureSensor2;
+    String textMessage;
+    int realTimeReport;// (0 - realtime, 1 log) DT
+    double rpmMax;
+    boolean vehicleIdleEventStatus ;//(1 - true, 0 - false)
+    boolean speedingEventStatus ; // (1- true, 0 -false);
+    double speedMax;
+    int mainPowerLoseEventStatus; // (1- off, 0 -on)
+    double throttlePositionMax ;//(%)
+    double fuelUser;// (0.1 litre)
+    double fuelLevel;//(%)
+    double engineCoolantTemperature;// (C)
+    String gForceHarshEventMax;// parse from 080C00800040
+    String gSensorData;
+    int harshAccelerationEventStatus;
+    int harshBrakingEventStatus;
+    int impactEventStatus;
+
     public PositionPacket(String message){
         _rawMessage = message;
         String[] data = message.split(",");
@@ -52,5 +89,10 @@ public class PositionPacket implements Serializable{
         ,harshBrakingEventStatus
         ,impactEventStatus
          */
+    }
+
+    public boolean performCRC(){
+        //TODO
+        return true;
     }
 }
