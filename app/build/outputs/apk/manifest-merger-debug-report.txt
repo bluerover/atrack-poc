@@ -16,6 +16,22 @@ ADDED from AndroidManifest.xml:2:1
 application
 ADDED from AndroidManifest.xml:5:5
 MERGED from com.akexorcist:library:1.0.0:13:5
+MERGED from com.android.support:support-v4:25.0.0:25:5
+MERGED from com.android.support:support-compat:25.0.0:25:5
+MERGED from com.android.support:support-media-compat:25.0.0:25:5
+MERGED from com.android.support:support-compat:25.0.0:25:5
+MERGED from com.android.support:support-core-utils:25.0.0:25:5
+MERGED from com.android.support:support-compat:25.0.0:25:5
+MERGED from com.android.support:support-core-ui:25.0.0:25:5
+MERGED from com.android.support:support-compat:25.0.0:25:5
+MERGED from com.android.support:support-fragment:25.0.0:25:5
+MERGED from com.android.support:support-compat:25.0.0:25:5
+MERGED from com.android.support:support-media-compat:25.0.0:25:5
+MERGED from com.android.support:support-compat:25.0.0:25:5
+MERGED from com.android.support:support-core-ui:25.0.0:25:5
+MERGED from com.android.support:support-compat:25.0.0:25:5
+MERGED from com.android.support:support-core-utils:25.0.0:25:5
+MERGED from com.android.support:support-compat:25.0.0:25:5
 	android:label
 		ADDED from AndroidManifest.xml:8:9
 	android:allowBackup
@@ -88,12 +104,24 @@ ADDED from AndroidManifest.xml:39:9
 		ADDED from AndroidManifest.xml:40:13
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
-MERGED from com.akexorcist:broker:1.0.0:6:5
-MERGED from com.akexorcist:netty_parser:1.0.0:6:5
-MERGED from com.akexorcist:parser_commons:1.0.0:6:5
-MERGED from com.akexorcist:netty_parser:1.0.0:6:5
-MERGED from com.akexorcist:parser_commons:1.0.0:6:5
-MERGED from com.akexorcist:parser_commons:1.0.0:6:5
+MERGED from com.android.support:support-v4:25.0.0:21:5
+MERGED from com.android.support:support-compat:25.0.0:21:5
+MERGED from com.android.support:support-media-compat:25.0.0:21:5
+MERGED from com.android.support:support-compat:25.0.0:21:5
+MERGED from com.android.support:support-core-utils:25.0.0:21:5
+MERGED from com.android.support:support-compat:25.0.0:21:5
+MERGED from com.android.support:support-core-ui:25.0.0:21:5
+MERGED from com.android.support:support-compat:25.0.0:21:5
+MERGED from com.android.support:support-fragment:25.0.0:21:5
+MERGED from com.android.support:support-compat:25.0.0:21:5
+MERGED from com.android.support:support-media-compat:25.0.0:21:5
+MERGED from com.android.support:support-compat:25.0.0:21:5
+MERGED from com.android.support:support-core-ui:25.0.0:21:5
+MERGED from com.android.support:support-compat:25.0.0:21:5
+MERGED from com.android.support:support-core-utils:25.0.0:21:5
+MERGED from com.android.support:support-compat:25.0.0:21:5
+	tools:overrideLibrary
+		ADDED from com.android.support:support-v4:25.0.0:23:9
 	android:targetSdkVersion
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
@@ -110,17 +138,14 @@ ADDED from com.akexorcist:library:1.0.0:8:5
 		ADDED from com.akexorcist:library:1.0.0:8:22
 uses-permission#android.permission.INTERNET
 ADDED from com.akexorcist:library:1.0.0:9:5
-MERGED from com.akexorcist:broker:1.0.0:10:5
 	android:name
 		ADDED from com.akexorcist:library:1.0.0:9:22
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from com.akexorcist:library:1.0.0:10:5
-MERGED from com.akexorcist:broker:1.0.0:11:5
 	android:name
 		ADDED from com.akexorcist:library:1.0.0:10:22
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
 ADDED from com.akexorcist:library:1.0.0:11:5
-MERGED from com.akexorcist:broker:1.0.0:12:5
 	android:name
 		ADDED from com.akexorcist:library:1.0.0:11:22
 activity#app.akexorcist.bluetotohspp.library.DeviceList

@@ -77,15 +77,13 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="disruptor-3.3.0" level="project" />
-    <orderEntry type="library" exported="" name="org.eclipse.paho.client.mqttv3-1.0.2" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-r7" level="project" />
-    <orderEntry type="library" exported="" name="mapdb-1.0.6" level="project" />
-    <orderEntry type="library" exported="" name="org.eclipse.paho.android.service-1.0.2" level="project" />
-    <orderEntry type="library" exported="" name="netty-all-4.0.25.Final" level="project" />
-    <orderEntry type="module" module-name="netty_parser" exported="" />
-    <orderEntry type="module" module-name="parser_commons" exported="" />
+    <orderEntry type="library" exported="" name="support-annotations-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="support-media-compat-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="support-compat-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="support-fragment-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="support-core-ui-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="support-core-utils-25.0.0" level="project" />
     <orderEntry type="module" module-name="library" exported="" />
-    <orderEntry type="module" module-name="broker" exported="" />
   </component>
 </module>
