@@ -96,6 +96,7 @@ public class AutoConnectService extends Service {
     * */
 
     public static String[] configurationQueue = new String[]{
+            "AT$PMGR=0,2,2,1,1,1",//disable power manager
             "AT$OBDS=0",
             "AT$TRAC=131,60,10000,15,0,0,16,0,0 ",
             "AT$IDLE=0,5,5,1",
