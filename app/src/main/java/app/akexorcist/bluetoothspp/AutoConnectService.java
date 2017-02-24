@@ -100,7 +100,7 @@ public class AutoConnectService extends Service {
             "AT$TRAC=131,60,10000,15,0,0,16,0,0 ",
             "AT$IDLE=0,5,5,1",
             "AT$RPME=4500,5,2500,10",
-            "AT$RACT=1,1,16",
+            "AT$RACT=1,3,16", //1,3,16 -> define wehere the report goes
             "AT$SPED=100,10,90,10",
             "AT$HBKE=2,250,5",
             "AT$HACE=2,250,5",
